@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Text, View } from "react-native";
 
+import { MOVIES_ROUTE } from '../constants/navigation';
+import { HUES } from '../constants/design-tokens';
+
 import { setGenres } from '../modules/genres';
 
-const MainScreenView = ({ genres, setGenres }) => {
+const LoadingScreenView = ({ genres, setGenres, navigation }) => {
 
   useEffect(() => {
     setTimeout(() => {
@@ -14,11 +17,17 @@ const MainScreenView = ({ genres, setGenres }) => {
     }, 1000)
   }, [setGenres])
 
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate(MOVIES_ROUTE)
+    }, 4000)
+  }, [genres])
+
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: "plum",
+        backgroundColor: HUES.BG_PAGE,
         alignItems: "center",
         justifyContent: "center",
       }}
@@ -49,4 +58,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const MainScreen = connect(mapStateToProps, mapDispatchToProps)(MainScreenView);
+export const LoadingScreen = connect(mapStateToProps, mapDispatchToProps)(LoadingScreenView);

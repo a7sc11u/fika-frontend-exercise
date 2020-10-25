@@ -1,4 +1,5 @@
 export default {
+  name: 'FikaSearch',
   icon:"./assets/fika-icon.png",
   splash: {
     "image": "./assets/fika-splash.png",

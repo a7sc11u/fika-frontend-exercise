@@ -1,5 +1,5 @@
 import { 
-  createStore as createReduxStore, 
+  createStore, 
   combineReducers, 
   applyMiddleware 
 } from 'redux';
@@ -11,9 +11,9 @@ import { genres } from './modules/genres';
 import { movies } from './modules/movies';
 
 /**
- * Create Store
+ * Co Store
  */
-export const configureStore = () => {
+const configureStore = () => {
   
   // combine reducers
   const rootReducer = combineReducers({
@@ -32,10 +32,13 @@ export const configureStore = () => {
     )
 
    // create store
-   const store = createReduxStore(
+   const store = createStore(
     rootReducer,
     middleware
   );
 
   return store;
 }
+
+// store singleton
+export const store = configureStore();
