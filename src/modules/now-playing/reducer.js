@@ -16,12 +16,13 @@ export const nowPlaying = produce((draft = initialState, action) => {
 
     case MOVIES_NOW_PLAYING_FETCH_START:
       draft.status = 'loading'
-      draft.page = 1;
       break;
 
     case MOVIES_NOW_PLAYING_FETCH_SUCCESS:
       draft.status = 'ready'
-      draft.movies = payload.results
+      draft.movies = payload.results;
+      draft.page = payload.page;
+      draft.totalpages = payload.totalpages;
       break;
 
     case MOVIES_NOW_PLAYING_FETCH_FAIL:
@@ -30,6 +31,7 @@ export const nowPlaying = produce((draft = initialState, action) => {
 
     case MOVIES_NOW_PLAYING_RESET:
       draft.page = 0;
+      draft.totalpages = 0;
       draft.movies = [];
       draft.status = 'initial';
   }

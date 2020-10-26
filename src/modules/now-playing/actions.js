@@ -34,7 +34,7 @@ const fetchMoviesNowPlayingByPage = (page) => async (dispatch, getState, { tmdb 
   
   try {
     // use tmdb service
-    const { results } = await tmdb.moviesFetchNowPlaying({ page });
+    const { results, page, totalPages } = await tmdb.moviesFetchNowPlaying({ page });
     // set success
     dispatch(fetchMoviesNowPlayingSuccess(results, page))
   } catch (error) { 
