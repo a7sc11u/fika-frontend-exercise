@@ -3,7 +3,7 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import { tmdb } from './services/tmdb';
-import { genres, movies } from './modules';
+import { genres, nowPlaying } from './modules';
 
 /**
  * Configure Store
@@ -13,7 +13,7 @@ const configureStore = () => {
   // combine reducers
   const rootReducer = combineReducers({
     genres,
-    movies,
+    nowPlaying,
   });
 
   // configure middleware

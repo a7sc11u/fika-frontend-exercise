@@ -5,15 +5,14 @@ import { Text, View } from 'react-native';
 import { HUES } from '../constants/design-tokens';
 
 import { fetchGenres } from '../modules/genres';
-import { fetchMoviesInitial, fetchMoviesNextPage } from '../modules/movies';
+import { fetchMoviesNowPlaying } from '../modules/now-playing';
 
 
-const MoviesView = ({ 
+const MoviesContainer = ({ 
   hasRequiredData, 
-  fetchMoviesInitial,
-  fetchMoviesNextPage, 
+  fetchMoviesNowPlaying,
   fetchGenres, 
-  movies 
+  nowPlaying 
 }) => {
   
   useEffect(() => {
@@ -21,20 +20,20 @@ const MoviesView = ({
   }, [])
 
   useEffect(() => {
-    fetchMoviesInitial()
+    fetchMoviesNowPlaying()
   }, [])
-
-  console.log('LENGTH', movies.length);
 
   return (
     <View
       style={{
         flex: 1,
+        padding: 20,
         backgroundColor: HUES.BG_PAGE,
       }}
     >
-      {hasRequiredData && movies.map(mov => (
+      {hasRequiredData && nowPlaying.map(mov => (
         <Text
+          key={mov.id}
           style={{
             color: "black",
             fontSize: 24,
@@ -50,7 +49,7 @@ const MoviesView = ({
 
 function mapStateToProps(state) {
 
-  const {page: moviesPage, status: moviesStatus} = state.movies
+  const {page: moviesPage, status: moviesStatus} = state.nowPlaying
   const { status : genresStatus } = state.genres;
 
   const hasMoviesData = moviesPage > 0 || moviesStatus === 'ready';
@@ -59,17 +58,16 @@ function mapStateToProps(state) {
 
   return {
     hasRequiredData: hasRequiredData,
-    movies: state.movies.list,
+    nowPlaying: state.nowPlaying.movies,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     fetchGenres: () => dispatch(fetchGenres()),
-    fetchMoviesInitial: () => dispatch(fetchMoviesInitial()),
-    fetchMoviesNextPage: () => dispatch(fetchMoviesNextPage()),
+    fetchMoviesNowPlaying: () => dispatch(fetchMoviesNowPlaying()),
   };
 }
 
-export const MoviesScreen = connect(mapStateToProps, mapDispatchToProps)(MoviesView);
+export const MoviesScreen = connect(mapStateToProps, mapDispatchToProps)(MoviesContainer);
 

@@ -5,12 +5,18 @@ const apiKey = "d432b933ecc6d5642d8d2befbc40c7ac"
  */
 class TMDB {
 
+  /**
+   * Fetch Movie Genres
+   */
   moviesFetchGenres = () => {
     return this.fetch({
       query: `genre/movie/list`
     })
   }
 
+  /**
+   * Fetch Now Playing Movies
+   */
   moviesFetchNowPlaying = ({page}) => {
     return this.fetch({
       query: `movie/now_playing`,
@@ -18,6 +24,9 @@ class TMDB {
     })
   }
 
+  /**
+   * Generic Fetch
+   */
   fetch = ({ 
     version='3',
     query='', 
@@ -36,6 +45,8 @@ class TMDB {
     const apiUrl = `https://api.themoviedb.org/${version}/${query}`;
   
     // fetch movies
+    // return a promise, to avoid handling the result promise 
+    // returned by fetch api.
     return new Promise((resolve, reject) => {
       fetch(
         `${apiUrl}?${queryParams.join('&')}`,

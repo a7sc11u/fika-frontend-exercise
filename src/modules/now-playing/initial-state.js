@@ -1,5 +1,5 @@
 export const initialState = {
-  list: [],
+  movies: [],
   page: 0,
   status: 'initial'
 };
