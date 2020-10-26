@@ -16,11 +16,8 @@ const MoviesContainer = ({
 }) => {
   
   useEffect(() => {
-    fetchGenres()
-  }, [])
-
-  useEffect(() => {
-    fetchMoviesNowPlaying()
+    fetchGenres();
+    fetchMoviesNowPlaying();
   }, [])
 
   return nowPlaying ? (<MovieListView movies={nowPlaying} />) : null;
