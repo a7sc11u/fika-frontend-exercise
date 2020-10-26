@@ -1,17 +1,12 @@
-import { 
-  createStore, 
-  combineReducers, 
-  applyMiddleware 
-} from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import { tmdb } from './services/tmdb';
-import { genres } from './modules/genres';
-import { movies } from './modules/movies';
+import { genres, movies } from './modules';
 
 /**
- * Co Store
+ * Configure Store
  */
 const configureStore = () => {
   
@@ -23,16 +18,14 @@ const configureStore = () => {
 
   // configure middleware
   const middleware = applyMiddleware(
-      thunk.withExtraArgument({
-        api: {
-          tmdb
-        }
-      }),
-      logger
-    )
+    thunk.withExtraArgument({
+      tmdb
+    }),
+    // logger
+  );
 
-   // create store
-   const store = createStore(
+  // create store
+  const store = createStore(
     rootReducer,
     middleware
   );

@@ -1,2 +1,1 @@
-export const LOADING_ROUTE = 'LOADING';
-export const MOVIES_ROUTE = 'MOVIES_ROUTE';
+export const ROUTE_MOVIES = 'Movies';
