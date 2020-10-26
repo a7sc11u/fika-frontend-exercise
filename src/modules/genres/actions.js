@@ -14,8 +14,8 @@ export const fetchGenres = () => async (dispatch, getState, { tmdb }) => {
   dispatch(fetchGenresStart())
 
   try {
-    const { results } = await tmdb.moviesFetchGenres();
-    dispatch(fetchGenresSuccess(results))
+    const { genres } = await tmdb.moviesFetchGenres();
+    dispatch(fetchGenresSuccess(genres))
   } catch (error) { 
     dispatch(fetchGenresError(error))
   }
