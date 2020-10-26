@@ -21,7 +21,7 @@ const configureStore = () => {
     thunk.withExtraArgument({
       tmdb
     }),
-    // logger
+    logger
   );
 
   // create store
