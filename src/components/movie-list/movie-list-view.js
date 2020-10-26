@@ -6,17 +6,19 @@ import { MovieListFooterView } from './movie-list-footer-view';
 
 import { styles } from './styles';
 
-export const MovieListView = ({ movies, page, onLoadMore}) => {
+const PAGE_SIZE = 20;
+
+export const MovieListView = ({ movies, page, totalPages, onLoadMore}) => {
 
   const listRef = useRef();
 
   const renderItem = ({ item }) => <MovieListItemView movie={item} />
 
-  const renderFooter = () => <MovieListFooterView onPress={onLoadMore} />
+  const renderFooter = () => page <= totalPages ? <MovieListFooterView onPress={onLoadMore} /> : null
 
   useEffect(() => {
     if(page > 1) {
-      const lastPageIndex = ((page - 1) * 20) - 1;
+      const lastPageIndex = ((page - 1) * PAGE_SIZE);
       listRef.current.scrollToIndex({animated: true, index : lastPageIndex});
     }
   }, [listRef, page])
@@ -25,6 +27,7 @@ export const MovieListView = ({ movies, page, onLoadMore}) => {
     <SafeAreaView style={styles.container}>
       <FlatList
         ref={listRef}
+        onScrollToIndexFailed={()=>{}}
         data={movies}
         renderItem={renderItem}
         keyExtractor={item => `${item.id}`}

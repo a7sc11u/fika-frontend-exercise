@@ -12,6 +12,7 @@ import { MovieListView } from '../components/movie-list';
 
 const MoviesContainer = ({ 
   page,
+  totalPages,
   fetching,
   nowPlaying, 
   fetchMovies,
@@ -34,6 +35,7 @@ const MoviesContainer = ({
     <MovieListView 
       movies={nowPlaying} 
       page={page}
+      totalPages={totalPages}
       onLoadMore={handleLoadMoreMovies} 
     />
   ) : null;
@@ -42,6 +44,7 @@ const MoviesContainer = ({
 function mapStateToProps(state) {
   return {
     page: state.nowPlaying.page,
+    totalPages: state.nowPlaying.totalPages,
     fetching: state.nowPlaying.state === 'fetching',
     nowPlaying: nowPlayingMovies(state)
   };

@@ -20,11 +20,8 @@ export const fetchMovies = () => async (dispatch, getState, { tmdb }) => {
 export const fetchNextPage = () => async (dispatch, getState, { tmdb }) => {
   // get next page by current state
   // fetch next page
-  setTimeout(()=> {
-    const nextPage = getState().nowPlaying.page + 1;
-    dispatch(fetchMovieByPage(nextPage));
-  }, 1000);
-  
+  const nextPage = getState().nowPlaying.page + 1;
+  dispatch(fetchMovieByPage(nextPage));
 };
 
 
@@ -37,9 +34,9 @@ const fetchMovieByPage = (fetchPage) => async (dispatch, getState, { tmdb }) => 
 
   try {
     // use tmdb service
-    const { results, page, totalPages } = await tmdb.moviesFetchNowPlaying({ page:fetchPage });
+    const { results, page, total_pages }  = await tmdb.moviesFetchNowPlaying({ page:fetchPage });
     // set success
-    dispatch(fetchMoviesSuccess(results, page, totalPages))
+    dispatch(fetchMoviesSuccess(results, page, total_pages))
   } catch (error) { 
     // catch error
     dispatch(fetchMoviesError(error))
