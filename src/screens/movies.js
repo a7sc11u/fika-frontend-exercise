@@ -4,15 +4,12 @@ import { connect } from 'react-redux';
 import { fetchGenres } from '../modules/genres';
 import { 
   nowPlayingMovies, 
-  hasRequiredData, 
   fetchMoviesNowPlaying
 } from '../modules/now-playing';
 
-import { MovieList } from '../components/movie-list';
-
+import { MovieListView } from '../components/movie-list';
 
 const MoviesContainer = ({ 
-  hasRequiredData, 
   nowPlaying, 
   fetchMoviesNowPlaying,
   fetchGenres, 
@@ -26,12 +23,11 @@ const MoviesContainer = ({
     fetchMoviesNowPlaying()
   }, [])
 
-  return hasRequiredData ? (<MovieList movies={nowPlaying} />) : null;
+  return nowPlaying ? (<MovieListView movies={nowPlaying} />) : null;
 }
 
 function mapStateToProps(state) {
   return {
-    hasRequiredData: hasRequiredData(state),
     nowPlaying: nowPlayingMovies(state)
   };
 }

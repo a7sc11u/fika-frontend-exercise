@@ -9,13 +9,13 @@ import {
 import { styles } from './styles';
 
 
-const MovieListItem = ({ movie }) => {
+const MovieListItemView = ({ movie }) => {
   return (
     <View style={styles.item}>
       <Text style={styles.title}>{movie.title}</Text>
-      <View style={styles.genresList}>
+      <View style={styles.genreList}>
         {movie.genres.map(genre => (
-          <Text style={styles.genreItem}>
+          <Text style={styles.genreItem} key={`${genre.id}`}>
             {genre.name}
           </Text>
         ))}
@@ -24,9 +24,9 @@ const MovieListItem = ({ movie }) => {
   )
 };
 
-export const MovieList = ({ movies }) => {
+export const MovieListView = ({ movies }) => {
 
-  const renderItem = ({ item }) => <MovieListItem movie={item} />
+  const renderItem = ({ item }) => <MovieListItemView movie={item} />
 
   return (
     <SafeAreaView style={styles.container}>

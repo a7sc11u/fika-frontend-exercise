@@ -20,25 +20,9 @@ const hasMoviesData = state => state.nowPlaying.page > 0;
  */
 const hasGenresData = state => state.genres.status === 'ready';
 
-/**
- * 
- */
-export const nowPlayingMovies = createSelector(
-  getNowPlayingMovies,
-  getGenre,
-  (movies, genres) => {  
-    
-    return movies.map(movie => {
-      return {
-        ...movie,
-        genres: movie.genre_ids.map(gid => genres[gid])
-      }
-    });
-  }
-)
 
 /**
- * 
+ * Selector to determine if movies and genres are loader
  */
 export const hasRequiredData = createSelector(
   hasMoviesData,
@@ -47,4 +31,23 @@ export const hasRequiredData = createSelector(
     return hasGenresData && hasMoviesData;
   }
 )
+
+
+/**
+ * Select now playing movies, with 
+ */
+export const nowPlayingMovies = createSelector(
+  hasRequiredData,
+  getNowPlayingMovies,
+  getGenre,
+  (hasData, movies, genres) => {  
+    return !hasData ? null : movies.map(movie => {
+      return {
+        ...movie,
+        genres: movie.genre_ids.map(gid => genres[gid])
+      }
+    });
+  }
+)
+
 
