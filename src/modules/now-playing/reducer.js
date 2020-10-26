@@ -15,12 +15,12 @@ export const nowPlaying = produce((draft = initialState, action) => {
   switch (action.type) {
 
     case MOVIES_NOW_PLAYING_FETCH_START:
-      draft.status = 'loading'
+      draft.status = 'fetching'
       break;
 
     case MOVIES_NOW_PLAYING_FETCH_SUCCESS:
       draft.status = 'ready'
-      draft.movies = payload.results;
+      draft.movies.push(...payload.results);
       draft.page = payload.page;
       draft.totalpages = payload.totalpages;
       break;

@@ -14,7 +14,7 @@ export const genres = produce((draft = initialState, action) => {
   switch (action.type) {
     
     case GENRES_FETCH_START:
-      draft.status = 'loading'
+      draft.status = 'fetching'
       break;
       
     case GENRES_FETCH_SUCCESS:

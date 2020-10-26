@@ -8,45 +8,48 @@ import {
 /**
  * Fetch Initial Movies
  */
-export const fetchMoviesNowPlaying = () => async (dispatch, getState, { tmdb }) => {
+export const fetchMovies = () => async (dispatch, getState, { tmdb }) => {
   // reset data;
-  dispatch(resetNowPlaying());
-  dispatch(fetchMoviesNowPlayingNextPage());
+  dispatch(resetMovies());
+  dispatch(fetchNextPage());
 };
 
 /**
  * Fetch Next Page
  */
-export const fetchMoviesNowPlayingNextPage = () => async (dispatch, getState, { tmdb }) => {
+export const fetchNextPage = () => async (dispatch, getState, { tmdb }) => {
   // get next page by current state
-  const nextPage = getState().nowPlaying.page + 1;
   // fetch next page
-  dispatch(fetchMoviesNowPlayingByPage(nextPage))
+  setTimeout(()=> {
+    const nextPage = getState().nowPlaying.page + 1;
+    dispatch(fetchMovieByPage(nextPage));
+  }, 1000);
+  
 };
 
 
 /**
  * Fetch Movies by Page
  */
-const fetchMoviesNowPlayingByPage = (page) => async (dispatch, getState, { tmdb }) => {
+const fetchMovieByPage = (fetchPage) => async (dispatch, getState, { tmdb }) => {
   // start
-  dispatch(fetchMoviesNowPlayingStart());
-  
+  dispatch(fetchMovieStart());
+
   try {
     // use tmdb service
-    const { results, page, totalPages } = await tmdb.moviesFetchNowPlaying({ page });
+    const { results, page, totalPages } = await tmdb.moviesFetchNowPlaying({ page:fetchPage });
     // set success
-    dispatch(fetchMoviesNowPlayingSuccess(results, page, totalPages))
+    dispatch(fetchMoviesSuccess(results, page, totalPages))
   } catch (error) { 
     // catch error
-    dispatch(fetchMoviesNowPlayingError(error))
+    dispatch(fetchMoviesError(error))
   }
 };
 
 /**
  * Fetch Start
  */
-const fetchMoviesNowPlayingStart = () => {
+const fetchMovieStart = () => {
   return {
     type: MOVIES_NOW_PLAYING_FETCH_START,
   };
@@ -55,7 +58,7 @@ const fetchMoviesNowPlayingStart = () => {
 /**
  * Fetch Success
  */
-const fetchMoviesNowPlayingSuccess = (results, page, totalPages) => {
+const fetchMoviesSuccess = (results, page, totalPages) => {
   return {
     type: MOVIES_NOW_PLAYING_FETCH_SUCCESS,
     payload: { results, page, totalPages },
@@ -65,7 +68,7 @@ const fetchMoviesNowPlayingSuccess = (results, page, totalPages) => {
 /**
  * Fetch Error
  */
-const fetchMoviesNowPlayingError = () => {
+const fetchMoviesError = () => {
   return {
     type: MOVIES_NOW_PLAYING_FETCH_FAIL,
   };
@@ -74,7 +77,7 @@ const fetchMoviesNowPlayingError = () => {
 /**
  * Reset State
  */
-export const resetNowPlaying = () => {
+export const resetMovies = () => {
   return {
     type: MOVIES_NOW_PLAYING_RESET,
   };

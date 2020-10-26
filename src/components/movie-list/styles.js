@@ -35,5 +35,15 @@ export const styles = StyleSheet.create({
   genreItem: { 
     marginRight: 16,
     marginTop: 8
+  },
+  footerButton: {
+    backgroundColor: HUES.GREEN_0,
+    padding: 24,
+    alignItems:'center',
+  },
+  footerButtonLabel: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
   }
 });

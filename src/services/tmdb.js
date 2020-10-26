@@ -30,7 +30,7 @@ class TMDB {
   fetch = ({ 
     version='3',
     query='', 
-    page='1', 
+    page=1, 
     language="en-US" 
   } = {}) => {
   
@@ -40,7 +40,7 @@ class TMDB {
       `language=${language}`,
       `page=${page}`,
     ];
-  
+    
     // base api url
     const apiUrl = `https://api.themoviedb.org/${version}/${query}`;
   
