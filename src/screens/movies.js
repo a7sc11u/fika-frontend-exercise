@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
 
-import { HUES } from '../constants/design-tokens';
 
 import { fetchGenres } from '../modules/genres';
 import { fetchMoviesNowPlaying } from '../modules/now-playing';
+
+import { MovieList } from '../components/movie-list';
 
 
 const MoviesContainer = ({ 
@@ -23,28 +24,7 @@ const MoviesContainer = ({
     fetchMoviesNowPlaying()
   }, [])
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        padding: 20,
-        backgroundColor: HUES.BG_PAGE,
-      }}
-    >
-      {hasRequiredData && nowPlaying.map(mov => (
-        <Text
-          key={mov.id}
-          style={{
-            color: "black",
-            fontSize: 24,
-            fontWeight: "bold",
-          }}
-        >
-          {mov.title}
-        </Text>
-      ))}
-    </View>
-  );
+  return hasRequiredData ? (<MovieList movies={nowPlaying} />) : null;
 }
 
 function mapStateToProps(state) {
