@@ -18,3 +18,21 @@ genres - [https://api.themoviedb.org/3/genre/movie/list?api_key=d432b933ecc6d564
 The API will provide part of the image url via the `poster_path` field of each film. It must be combined with the base image path `https://image.tmdb.org/t/p/w500/`
 
 **Have fun!**
+
+## 🚀 How to use
+
+#### Install dependencies
+- Run `yarn` or `npm install`
+
+#### Expo dev tools
+- Run `expo start` or `yarn start`, to open expo dev tools.
+
+#### iOS
+- Run `yarn ios` to bundle ios app and start the simulator
+
+#### Android
+- Run `yarn android` to bundle ios app and start the simulator
+
+#### Web
+- Run `yarn web` to bundle ios app and start the simulator
+
