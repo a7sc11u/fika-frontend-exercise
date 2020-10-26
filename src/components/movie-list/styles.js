@@ -8,19 +8,28 @@ export const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
     backgroundColor: HUES.BG_PAGE,
   },
-  item: {
-    marginVertical: 12,
+  moviePoster: {
+    width: 100, height: 150
+  },
+  movieItem: {
+    marginVertical: 16,
     marginHorizontal: 16,
+    flexDirection: 'row'
+  },
+  movieItemInfo: {
+    marginLeft: 16,
+    flex: 1,
+    flexDirection: 'column',
+  },
+  movieItemTitle: {
     color: "black",
     fontSize: 24,
     fontWeight: "bold",
-  },
-  title: {
-    fontSize: 32,
+    flexShrink: 1,
+    flexWrap: 'wrap'
   },
   genresList: { 
     flexDirection: "row",
-    width: '70%',
     flexWrap: 'wrap'
   },
   genreItem: { 
