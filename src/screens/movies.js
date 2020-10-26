@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
-
 
 import { fetchGenres } from '../modules/genres';
-import { fetchMoviesNowPlaying } from '../modules/now-playing';
+import { 
+  nowPlayingMovies, 
+  hasRequiredData, 
+  fetchMoviesNowPlaying
+} from '../modules/now-playing';
 
 import { MovieList } from '../components/movie-list';
 
 
 const MoviesContainer = ({ 
   hasRequiredData, 
+  nowPlaying, 
   fetchMoviesNowPlaying,
   fetchGenres, 
-  nowPlaying 
 }) => {
   
   useEffect(() => {
@@ -28,17 +30,9 @@ const MoviesContainer = ({
 }
 
 function mapStateToProps(state) {
-
-  const {page: moviesPage, status: moviesStatus} = state.nowPlaying
-  const { status : genresStatus } = state.genres;
-
-  const hasMoviesData = moviesPage > 0 || moviesStatus === 'ready';
-  const hasGenresData = genresStatus === 'ready'
-  const hasRequiredData = hasGenresData && hasMoviesData;
-
   return {
-    hasRequiredData: hasRequiredData,
-    nowPlaying: state.nowPlaying.movies,
+    hasRequiredData: hasRequiredData(state),
+    nowPlaying: nowPlayingMovies(state)
   };
 }
 

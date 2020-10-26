@@ -18,4 +18,13 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 32,
   },
+  genresList: { 
+    flexDirection: "row",
+    width: '70%',
+    flexWrap: 'wrap'
+  },
+  genreItem: { 
+    marginRight: 16,
+    marginTop: 8
+  }
 });
